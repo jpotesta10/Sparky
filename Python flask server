@@ -1,0 +1,28 @@
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+@app.route('/get_script', methods=['POST'])
+def get_script():
+    description = request.get_json().get('description', '')
+    # Implement logic to get script from ChatGPT using description
+    script = "Generated script based on description"
+    return jsonify({'script': script})
+
+@app.route('/generate_voice', methods=['POST'])
+def generate_voice():
+    script = request.get_json().get('script', '')
+    # Implement logic to generate voice using Eleven Labs API
+    audio_url = "URL_to_generated_audio_file"
+    return jsonify({'audio_url': audio_url})
+
+@app.route('/create_video', methods=['POST'])
+def create_video():
+    description = request.get_json().get('description', '')
+    audio_url = request.get_json().get('audio_url', '')
+    # Implement logic to create video using Canva/Midjourney API
+    # Return success or failure
+    return jsonify({'message': 'Video creation successful'})
+
+if __name__ == '__main__':
+    app.run(debug=True)
